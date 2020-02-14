@@ -22,9 +22,9 @@ def home():
 
 @app.route('/render')
 def scrape():
-    w = int(request.params.get('w', 1280))
-    h = int(request.params.get('w', 720))
-    url = request.params.get('url', 'https://google.com')
+    w = int(request.args.get('w', 1280))
+    h = int(request.args.get('w', 720))
+    url = request.args.get('url', 'https://google.com')
     wd = _create_driver(w, h)
     wd.get(url)
     fn = str(uuid4()) + '.jpg'
