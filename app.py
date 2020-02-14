@@ -10,9 +10,10 @@ def _create_driver(w, h):
     chrome_options = webdriver.ChromeOptions()
     chrome_options.add_argument('--headless')
     chrome_options.add_argument('--no-sandbox')
-    chrome_options.add_argument('window-size={}x{}'.format(w, h))
     chrome_options.add_argument('--disable-dev-shm-usage')
-    return webdriver.Chrome('chromedriver', options=chrome_options)
+    wd = webdriver.Chrome('chromedriver', options=chrome_options)
+    wd.set_window_size(w, h)
+    return wd
 
 
 @app.route('/')
