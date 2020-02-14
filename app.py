@@ -10,10 +10,9 @@ def _create_driver(w, h):
     chrome_options = webdriver.ChromeOptions()
     chrome_options.add_argument('--headless')
     chrome_options.add_argument('--no-sandbox')
+    chrome_options.add_argument('window-size={}x{}'.format(w, h))
     chrome_options.add_argument('--disable-dev-shm-usage')
-    wd = webdriver.Chrome('chromedriver', options=chrome_options)
-    wd.set_window_size(w, h)
-    return wd
+    return webdriver.Chrome('chromedriver', options=chrome_options)
 
 
 @app.route('/')
@@ -24,7 +23,7 @@ def home():
 @app.route('/render')
 def scrape():
     w = int(request.args.get('w', 1280))
-    h = int(request.args.get('w', 720))
+    h = int(request.args.get('h', 720))
     url = request.args.get('url', 'https://google.com')
     wd = _create_driver(w, h)
     wd.get(url)
